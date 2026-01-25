@@ -1,5 +1,7 @@
 package com.example.SpringBoot_rest_JopApp.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,8 +20,9 @@ import java.util.List;
 @AllArgsConstructor
 //as we are going to use it in springboot so we need declare it as component
 @Component
+@Entity
 public class JobPost {
-
+    @Id
     private int postId;
     private String postProfile;
     private String postDesc;

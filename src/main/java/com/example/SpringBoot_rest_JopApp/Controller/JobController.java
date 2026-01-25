@@ -4,8 +4,10 @@ import com.example.SpringBoot_rest_JopApp.model.JobPost;
 import com.example.SpringBoot_rest_JopApp.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.annotation.Retention;
 import java.util.List;
 //if we use @Controller by default it expect a view name in return which is not required in our app now so we will use  @RequestBody in the method returning Data
 //else we can dircetly use @RestController
@@ -37,13 +39,23 @@ public class JobController {
     }
 
     @PutMapping("addJob")
-    public boolean updateJob(@RequestBody JobPost job){
-        return jobService.updateJob(job);
-
+    public void updateJob(@RequestBody JobPost job){
+         jobService.updateJob(job);
     }
 
     @DeleteMapping("jobPost/{postId}")
-    public boolean deleteJob(@PathVariable int postId){
-        return jobService.deleteJob(postId);
+    public void deleteJob(@PathVariable int postId){
+        jobService.deleteJob(postId);
+    }
+
+    @GetMapping("loadData")
+    public  String LoadData(){
+        jobService.loadData();
+        return "sucess";
+    }
+
+    @GetMapping("jobPost/search/{keyword}")
+    public List<JobPost> searchByKeyWord( @PathVariable("keyword") String keyword){
+       return jobService.searchByKeyWord(keyword);
     }
 }
